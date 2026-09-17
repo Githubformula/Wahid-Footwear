@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAHID FOOTWEAR | Premium Footwear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#121212',
+                            card: '#1e1e1e',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab',
+                            accent: '#2a2a2a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-amber-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-brand-gold/20 group-hover:scale-105 transition-transform">
+                    W
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-gray-200 to-brand-gold bg-clip-text text-transparent">WAHID</span>
+                    <span class="block text-xs uppercase tracking-widest text-brand-gold font-semibold">Footwear Shop</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#hero" class="text-gray-300 hover:text-brand-gold transition-colors">Home</a>
+                <a href="#catalog" class="text-gray-300 hover:text-brand-gold transition-colors">Collection</a>
+                <a href="#features" class="text-gray-300 hover:text-brand-gold transition-colors">Why Us</a>
+                <a href="#policies" class="text-gray-300 hover:text-brand-gold transition-colors">Policies</a>
+                <a href="#contact" class="text-gray-300 hover:text-brand-gold transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button id="navAdminBtn" onclick="handleAdminNavClick()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-brand-card border border-gray-700 hover:border-brand-gold text-gray-300 hover:text-white text-xs font-bold transition-all">
+                    <i class="fa-solid fa-lock text-brand-gold"></i>
+                    <span id="navAdminText">Admin Login</span>
+                </button>
+
+                <a href="https://wa.me/919069503165?text=Hi,%20I%20want%20to%20inquire%20about%20footwear." target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold text-xs sm:text-sm shadow-lg transition-all">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919069503165?text=Hi,%20I%20am%20looking%20for%20footwear." target="_blank" aria-label="Chat on WhatsApp" class="fixed bottom-6 left-6 z-40 bg-green-600 hover:bg-green-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition-transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <!-- Floating Email Button -->
+    <a href="mailto:turbogaming111@gmail.com?subject=Footwear%20Inquiry&body=Hi,%20I%20am%20looking%20for%20footwear." aria-label="Email Us" class="fixed bottom-24 left-6 z-40 bg-red-600 hover:bg-red-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl transition-transform hover:scale-110">
+        <i class="fa-solid fa-envelope"></i>
+    </a>
+
+    <!-- Floating Toast Notification Container -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 ease-out bg-[#1f1f1f] border border-gray-700 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
+        <div id="toastIcon" class="text-green-400 text-lg">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <p id="toastTitle" class="font-bold text-xs">Success</p>
+            <p id="toastMessage" class="text-xs text-gray-400">Action completed successfully.</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-card border border-brand-gold/30 text-brand-gold text-xs font-semibold tracking-wider uppercase">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>Welcome to Wahid Footwear Shop</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                    Step Into <span class="bg-gradient-to-r from-brand-gold via-amber-200 to-amber-500 bg-clip-text text-transparent">Luxury</span> & Comfort
+                </h1>
+                <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
+                    Discover handpicked elegance, premium leather formals, trendy casuals, and durable sportswear for the whole family at our Jafrabad.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#catalog" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-gold to-amber-600 text-black font-extrabold text-base shadow-xl transition-all text-center">
+                        Explore Collection <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-card border border-gray-700 hover:border-brand-gold text-gray-200 font-bold text-base transition-all text-center">
+                        Visit Shop
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-5 relative">
+                <div class="rounded-3xl overflow-hidden bg-brand-card border border-gray-700 shadow-2xl aspect-[4/5]">
+                    <img src="https://lh3.googleusercontent.com/d/1L2kchToLVH8j2JPFVeyRyCapmZl0LQxy" alt="Featured Footwear" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="py-24 bg-brand-card/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12">
+                <div>
+                    <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">Curated Catalog</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 tracking-tight">Our Footwear Range</h2>
+                </div>
+                <div id="adminActionPanel" class="hidden">
+                    <button onclick="openAddProductModal()" class="px-5 py-3 rounded-xl bg-brand-gold text-black font-extrabold text-sm shadow-lg hover:opacity-90 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-base"></i> Add New Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="max-w-md mx-auto mb-8">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        onkeyup="handleSearch()" 
+                        placeholder="Search shoes by name, style, or type..." 
+                        class="w-full pl-11 pr-4 py-3 rounded-xl bg-brand-card border border-gray-700 text-white text-sm focus:border-brand-gold outline-none transition-all shadow-inner"
+                    >
+                </div>
+            </div>
+
+            <!-- Categories Filter -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+                <button onclick="filterProducts('all')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-gold text-black transition-all shadow-md" data-category="all">All Styles</button>
+                <button onclick="filterProducts('men-formal')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all" data-category="men-formal">Men's Formal</button>
+                <button onclick="filterProducts('men-casual')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all" data-category="men-casual">Men's Casual</button>
+                <button onclick="filterProducts('womens')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all" data-category="womens">Women's Collection</button>
+                <button onclick="filterProducts('sports')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all" data-category="sports">Sports & Running</button>
+                <button onclick="filterProducts('kids')" class="cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all" data-category="kids">Kids' Footwear</button>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="features" class="py-24 bg-brand-dark border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">The Wahid Standard</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-3">Why Shop With Us</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-3xl bg-brand-card border border-gray-800 text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Trusted Family Business</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Serving quality footwear with trust, honesty, and personal customer care for years.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-brand-card border border-gray-800 text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fair Shop Prices</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Genuine retail pricing on all formal shoes, casual wear, sandals, and sports editions.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-brand-card border border-gray-800 text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-shoe-prints"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Perfect Fit Guarantee</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Try them on physically at our store or inquire about sizing instantly via WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies Section -->
+    <section id="policies" class="py-24 bg-brand-card/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">Shop Guidelines</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-3">Return & Exchange Policy</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="p-8 rounded-3xl bg-brand-dark border border-gray-800 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center shrink-0 mt-1">
+                        <i class="fa-solid fa-check text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Size Exchange Available</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Brought the wrong size? Visit our Jafrabad within 7 days with the original box and bill for a quick and hassle-free size exchange.</p>
+                    </div>
+                </div>
+                <div class="p-8 rounded-3xl bg-brand-dark border border-gray-800 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center shrink-0 mt-1">
+                        <i class="fa-solid fa-ban text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">No Returns on Used Footwear</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Footwear must be unworn and in original pristine condition. We strictly do not accept returns or exchanges on used chappals or shoes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-brand-dark border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">Get in Touch</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">Visit Our Shop</h2>
+                        <p class="text-gray-400 text-sm mt-3 leading-relaxed">Drop by to explore our entire footwear collection in person, or reach out to us directly through phone, email, or WhatsApp.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-card border border-gray-700 text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Shop Address</h4>
+                                <p class="text-gray-400 text-sm mt-1">Wahid Footwear, Shop No.824, Street No.30/2, Indra Chowk, Jafrabad, Delhi-110053, India</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-card border border-gray-700 text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Phone & WhatsApp Inquiry</h4>
+                                <p class="text-gray-400 text-sm mt-1">+91 9069503165, +91 9871164784</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <a href="https://wa.me/919069503165?text=Hi,%20I%20would%20like%20to%20visit%20the%20shop." target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-green-600 hover:bg-green-500 text-white font-extrabold text-sm shadow-xl transition-all">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Chat on WhatsApp Now
+                        </a>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-brand-card border border-gray-800 p-8 shadow-2xl">
+                    <h3 class="text-xl font-bold text-white mb-6">Quick Inquiry Form</h3>
+                    <form onsubmit="handleInquirySubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-400 mb-2">Your Name</label>
+                            <input type="text" id="inquiryName" required placeholder="Enter your name" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-400 mb-2">Phone Number</label>
+                            <input type="tel" id="inquiryPhone" required placeholder="Enter your phone number" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-400 mb-2">Message or Footwear Interest</label>
+                            <textarea id="inquiryMsg" rows="3" required placeholder="E.g. Looking for formal shoes in UK size 9..." class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-gold to-amber-600 text-black font-extrabold text-sm shadow-lg hover:opacity-95 transition-all">
+                            Send Inquiry via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Location Section -->
+    <section class="py-12 px-4 bg-[#181818] border-t border-gray-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Visit Our Store</span>
+                <h3 class="text-2xl font-extrabold text-white">Wahid Footwear - Jafrabad</h3>
+                <p class="text-gray-400 text-sm max-w-md">
+                    Drop by our shop in Jafrabad, Delhi to check out our full collection of formal shoes, chappals, and casual wear in person!
+                </p>
+                <div class="pt-2">
+                    <a href="https://maps.app.goo.gl/xEDfm42YN4joQUMg9" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition-all shadow-lg">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Get Directions</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-gray-900 border border-gray-800 p-6 rounded-2xl w-full md:w-80 shadow-xl space-y-4">
+                <div class="flex items-center gap-3 text-amber-400">
+                    <i class="fa-solid fa-store text-xl"></i>
+                    <span class="font-bold text-white">Store Hours</span>
+                </div>
+                <p class="text-xs text-gray-400">Sunday – Saturday: 11:00 AM – 11:00 PM</p>
+                <div class="border-t border-gray-800 pt-3 flex items-center gap-2 text-xs text-green-400">
+                    <i class="fa-solid fa-circle text-[8px]"></i>
+                    <span>Open for Walk-ins & Retail</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="py-12 bg-gray-900/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-extrabold text-white tracking-wider">Customer Reviews</h2>
+                <p class="text-gray-400 text-sm mt-2">See what our buyers say about our footwear shop quality.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Side: Leave a Review Form -->
+                <div class="bg-[#181818] p-6 rounded-2xl border border-gray-800 shadow-xl h-fit">
+                    <h3 class="text-lg font-bold text-white mb-4">Leave Your Review</h3>
+                    <form id="reviewForm" onsubmit="submitReview(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Your Name</label>
+                            <input type="text" id="reviewerName" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-sm focus:border-amber-400 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Rating</label>
+                            <select id="reviewRating" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-sm focus:border-amber-400 outline-none">
+                                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                                <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                                <option value="3">⭐⭐⭐ (3/5)</option>
+                                <option value="2">⭐⭐ (2/5)</option>
+                                <option value="1">⭐ (1/5)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Your Comment</label>
+                            <textarea id="reviewComment" rows="3" required placeholder="Great quality chappals and formal shoes!" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-sm focus:border-amber-400 outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition-all shadow-lg">
+                            Submit Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Side: Display List of Reviews -->
+                <div class="lg:col-span-2 space-y-4">
+                    <h3 class="text-lg font-bold text-white mb-4">What People Say</h3>
+                    <div id="reviewsContainer" class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                        <!-- Dynamic reviews will load here automatically -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div>
+                <span class="text-lg font-extrabold tracking-wider text-white">WAHID FOOTWEAR</span>
+                <p class="text-xs text-gray-500 mt-1">Jafrabad Shop, Delhi • Quality Footwear for Everyone</p>
+            </div>
+            <p class="text-xs text-gray-500">© 2026 Wahid Footwear Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-brand-card border border-brand-gold/50 rounded-3xl max-w-sm w-full p-8 shadow-2xl relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-xl mx-auto mb-3">
+                    <i class="fa-solid fa-lock-open"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-white">Owner Admin Login</h3>
+                <p class="text-xs text-gray-400 mt-1">Enter your password to manage products</p>
+            </div>
+            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Admin Password</label>
+                    <input type="password" id="adminPasswordInput" required placeholder="Enter password" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm shadow-lg hover:opacity-95 transition-all">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Details Modal with Multiple Angles -->
+    <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-brand-card border border-gray-800 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-6 bg-gray-900 flex flex-col justify-between">
+                    <div class="relative h-64 md:h-80 bg-black rounded-2xl overflow-hidden mb-4">
+                        <img id="modalMainImg" src="" alt="Product Angle" class="w-full h-full object-cover">
+                        <span id="modalTag" class="absolute top-3 left-3 px-3 py-1 bg-brand-gold text-black text-xs font-extrabold rounded-lg uppercase"></span>
+                    </div>
+                    <div id="modalThumbnails" class="flex gap-2 overflow-x-auto pb-2"></div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between">
+                    <div>
+                        <span id="modalCategory" class="text-xs text-brand-gold font-bold uppercase tracking-wider"></span>
+                        <h3 id="modalTitle" class="text-2xl font-extrabold text-white mt-1"></h3>
+                        <p id="modalPrice" class="text-2xl font-extrabold text-brand-gold mt-2"></p>
+                        <p id="modalDesc" class="text-gray-400 text-sm mt-4 leading-relaxed"></p>
+                        <div class="mt-6">
+                            <label class="block text-xs uppercase font-bold text-gray-400 mb-2">Select Size (UK/India)</label>
+                            <div id="sizeSelector" class="flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a id="whatsappInquiryBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-extrabold text-sm shadow-lg transition-all">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Inquire on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div id="addProductModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-brand-card border border-brand-gold/50 rounded-3xl max-w-lg w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAddProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-extrabold text-white mb-6"><i class="fa-solid fa-plus-circle text-brand-gold"></i> Add New Product</h3>
+            <form onsubmit="handleAddNewProduct(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Shoe Name</label>
+                    <input type="text" id="newProdName" required placeholder="e.g. Leather Oxford Brogue" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Category</label>
+                        <select id="newProdCat" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                            <option value="men-formal">Men's Formal</option>
+                            <option value="men-casual">Men's Casual</option>
+                            <option value="womens">Women's Collection</option>
+                            <option value="sports">Sports & Running</option>
+                            <option value="kids">Kids' Footwear</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Price (₹)</label>
+                        <input type="number" id="newProdPrice" required placeholder="1499" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Badge Tag</label>
+                        <input type="text" id="newProdTag" placeholder="e.g. Best Seller" value="New Arrival" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Sizes (Comma separated)</label>
+                        <input type="text" id="newProdSizes" placeholder="6, 7, 8, 9, 10" value="7, 8, 9, 10" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Main Image URL</label>
+                    <input type="url" id="newProdImg1" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Second Image URL (Optional)</label>
+                    <input type="url" id="newProdImg2" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-400 mb-1">Description</label>
+                    <textarea id="newProdDesc" rows="2" placeholder="Comfortable sole, genuine finish..." class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-gray-700 text-white text-sm focus:border-brand-gold outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-amber-600 text-black font-extrabold text-sm shadow-lg hover:opacity-95 transition-all mt-2">
+                    Save & Publish Product
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationBox" class="fixed bottom-6 right-6 z-50 bg-brand-card border border-brand-gold text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-32 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-brand-gold text-xl"></i>
+        <div>
+            <h5 id="notifTitle" class="font-bold text-sm">Success</h5>
+            <p id="notifMsg" class="text-xs text-gray-400">Action completed successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = "Faraz@123";
+        let isAdminLoggedIn = localStorage.getItem('wahid_admin_auth') === 'true';
+
+        let products = [
+            {
+                id: 1,
+                name: "Classic Black Formal Oxford",
+                category: "men-formal",
+                price: 1899,
+                tag: "Best Seller",
+                images: [
+                    "https://m.media-amazon.com/images/I/510C03Rd0TL._SL1200_.jpg",
+                    "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Handcrafted genuine finish formal shoes designed for executive boardroom presence and wedding occasions.",
+                sizes: [7, 8, 9, 10]
+            },
+            {
+                id: 2,
+                name: "Urban Tan Casual Loafers",
+                category: "men-casual",
+                price: 1299,
+                tag: "Trending",
+                images: [
+                    "https://images.unsplash.com/photo-1533867617858-e7d97e0afd8b?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Lightweight slip-on casual loafers combining supreme comfort with everyday street style.",
+                sizes: [6, 7, 8, 9, 10]
+            },
+            {
+                id: 3,
+                name: "Athletic Pro Running Shoes",
+                category: "sports",
+                price: 1599,
+                tag: "New Arrival",
+                images: [""],
+                description: "High-performance mesh running shoes with shock-absorbing cushioning soles for daily workouts.",
+                sizes: [7, 8, 9, 10, 11]
+            },
+            {
+                id: 4,
+                name: "Designer Women's Ethnic Juttis",
+                category: "womens",
+                price: 999,
+                tag: "Festive Special",
+                images: [
+                    "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Beautifully embroidered traditional footwear matching wedding and festive attire.",
+                sizes: [5, 6, 7, 8]
+            }
+        ];
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filtered = products.filter(product => {
+                const matchesName = product.name.toLowerCase().includes(query);
+                const matchesCategory = product.category.toLowerCase().replace('-', ' ').includes(query);
+                const matchesTag = product.tag.toLowerCase().includes(query);
+                return matchesName || matchesCategory || matchesTag;
+            });
+            renderProducts(filtered);
+        }
+
+        const savedProducts = localStorage.getItem('wahid_custom_products');
+        if (savedProducts) {
+            try { products = JSON.parse(savedProducts); } catch(e) {}
+        }
+
+        let currentFilter = 'all';
+        let selectedSize = null;
+        let currentProduct = null;
+
+        window.onload = function() {
+            updateAdminUIState();
+            filterProducts('all');
+            renderReviews();
+        };
+
+        function handleAdminNavClick() {
+            if (isAdminLoggedIn) {
+                if (confirm("Do you want to log out of Admin mode?")) {
+                    isAdminLoggedIn = false;
+                    localStorage.setItem('wahid_admin_auth', 'false');
+                    localStorage.setItem('wahid_admin_logged_in', 'false');
+                    updateAdminUIState();
+                    showNotification("Logged Out", "Exited admin mode successfully.");
+                    renderReviews();
+                }
+            } else {
+                document.getElementById('loginModal').classList.remove('hidden');
+            }
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const val = document.getElementById('adminPasswordInput').value;
+            if (val === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('wahid_admin_auth', 'true');
+                localStorage.setItem('wahid_admin_logged_in', 'true');
+                closeLoginModal();
+                document.getElementById('adminPasswordInput').value = '';
+                updateAdminUIState();
+                showNotification("Welcome Admin!", "Successfully logged into dashboard.");
+                renderReviews();
+            } else {
+                alert("Incorrect password! Please try again.");
+            }
+        }
+
+        function updateAdminUIState() {
+            const actionPanel = document.getElementById('adminActionPanel');
+            const navBtnText = document.getElementById('navAdminText');
+            const navBtn = document.getElementById('navAdminBtn');
+
+            if (isAdminLoggedIn) {
+                actionPanel.classList.remove('hidden');
+                navBtnText.textContent = "Admin Logout";
+                navBtn.className = "inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-brand-gold text-black text-xs font-extrabold transition-all shadow-md";
+            } else {
+                actionPanel.classList.add('hidden');
+                navBtnText.textContent = "Admin Login";
+                navBtn.className = "inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-brand-card border border-gray-700 hover:border-brand-gold text-gray-300 hover:text-white text-xs font-bold transition-all";
+            }
+            renderProducts(products);
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500">No footwear found in this category. Click "Add New Product" to list one.</div>`;
+                return;
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "group bg-brand-dark rounded-3xl border border-gray-800 hover:border-brand-gold/50 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl relative";
+                
+                let deleteBtnHtml = '';
+                if (isAdminLoggedIn) {
+                    deleteBtnHtml = `
+                        <button onclick="deleteProduct(${product.id})" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-xl bg-red-600/95 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-all" title="Delete Product">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    `;
+                }
+
+                const primaryImg = product.images && product.images.length > 0 ? product.images[0] : 'https://placehold.co/600x400/1e1e1e/d4af37?text=Wahid+Footwear';
+
+                card.innerHTML = `
+                    ${deleteBtnHtml}
+                    <div class="relative aspect-[4/3] bg-gray-900 overflow-hidden cursor-pointer" onclick="openProductModal(${product.id})">
+                        <img src="${primaryImg}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 bg-brand-gold text-black text-xs font-extrabold rounded-lg uppercase tracking-wider">${product.tag}</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-xs text-brand-gold font-bold uppercase tracking-wider">${product.category.replace('-', ' ')}</span>
+                            <h3 class="text-lg font-bold text-white mt-1 group-hover:text-brand-gold transition-colors cursor-pointer" onclick="openProductModal(${product.id})">${product.name}</h3>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-800/80">
+                            <div>
+                                <span class="text-xs text-gray-500 block">Price</span>
+                                <span class="text-xl font-extrabold text-white">₹${Number(product.price).toLocaleString('en-IN')}</span>
+                            </div>
+                            <button onclick="openProductModal(${product.id})" class="px-4 py-2.5 rounded-xl bg-brand-card hover:bg-brand-gold hover:text-black border border-gray-700 hover:border-brand-gold font-bold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(category) {
+            currentFilter = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.className = "cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-gold text-black transition-all shadow-md";
+                } else {
+                    btn.className = "cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-brand-card border border-gray-700 text-gray-300 hover:border-brand-gold transition-all";
+                }
+            });
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        function openAddProductModal() {
+            document.getElementById('addProductModal').classList.remove('hidden');
+        }
+        function closeAddProductModal() {
+            document.getElementById('addProductModal').classList.add('hidden');
+        }
+
+        function handleAddNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('newProdName').value;
+            const category = document.getElementById('newProdCat').value;
+            const price = Number(document.getElementById('newProdPrice').value);
+            const tag = document.getElementById('newProdTag').value;
+            const img1 = document.getElementById('newProdImg1').value;
+            const img2 = document.getElementById('newProdImg2').value;
+            
+            let images = [img1];
+            if (img2 && img2.trim() !== '') images.push(img2.trim());
+
+            const description = document.getElementById('newProdDesc').value;
+            const sizesRaw = document.getElementById('newProdSizes').value;
+            const sizes = sizesRaw.split(',').map(s => Number(s.trim())).filter(s => !isNaN(s));
+
+            const newProduct = {
+                id: Date.now(),
+                name,
+                category,
+                price,
+                tag,
+                images,
+                description,
+                sizes: sizes.length > 0 ? sizes : [7, 8, 9, 10]
+            };
+
+            products.unshift(newProduct);
+            localStorage.setItem('wahid_custom_products', JSON.stringify(products));
+            closeAddProductModal();
+            e.target.reset();
+            filterProducts(currentFilter);
+            showNotification("Product Added!", `Successfully published "${name}" to your catalog.`);
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Are you sure you want to remove this product?")) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('wahid_custom_products', JSON.stringify(products));
+                filterProducts(currentFilter);
+                showNotification("Product Removed", "Deleted from catalog.");
+            }
+        }
+
+        function openProductModal(id) {
+            currentProduct = products.find(p => p.id === id);
+            if (!currentProduct) return;
+            selectedSize = currentProduct.sizes[0];
+
+            const imgList = currentProduct.images && currentProduct.images.length > 0 ? currentProduct.images : ['https://placehold.co/600x400/1e1e1e/d4af37?text=Wahid+Footwear'];
+
+            document.getElementById('modalMainImg').src = imgList[0];
+            document.getElementById('modalTag').textContent = currentProduct.tag;
+            document.getElementById('modalCategory').textContent = currentProduct.category.replace('-', ' ');
+            document.getElementById('modalTitle').textContent = currentProduct.name;
+            document.getElementById('modalPrice').textContent = `₹${Number(currentProduct.price).toLocaleString('en-IN')}`;
+            document.getElementById('modalDesc').textContent = currentProduct.description || "No description provided.";
+
+            const thumbContainer = document.getElementById('modalThumbnails');
+            thumbContainer.innerHTML = '';
+            if (imgList.length > 1) {
+                thumbContainer.classList.remove('hidden');
+                imgList.forEach((imgUrl, index) => {
+                    const thumbBtn = document.createElement('button');
+                    thumbBtn.className = `w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${index === 0 ? 'border-brand-gold scale-105' : 'border-gray-700 opacity-60 hover:opacity-100'}`;
+                    thumbBtn.innerHTML = `<img src="${imgUrl}" class="w-full h-full object-cover">`;
+                    thumbBtn.onclick = () => {
+                        document.getElementById('modalMainImg').src = imgUrl;
+                        thumbContainer.querySelectorAll('button').forEach(b => b.className = "w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 border-gray-700 opacity-60 hover:opacity-100");
+                        thumbBtn.className = "w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 border-brand-gold scale-105";
+                    };
+                    thumbContainer.appendChild(thumbBtn);
+                });
+            } else {
+                thumbContainer.classList.add('hidden');
+            }
+
+            updateWhatsAppLink();
+
+            const sizeContainer = document.getElementById('sizeSelector');
+            sizeContainer.innerHTML = '';
+            currentProduct.sizes.forEach((sz, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `px-4 py-2 rounded-xl text-xs font-bold border transition-all ${idx === 0 ? 'bg-brand-gold text-black border-brand-gold' : 'bg-brand-dark text-gray-300 border-gray-700 hover:border-brand-gold'}`;
+                btn.textContent = `UK ${sz}`;
+                btn.onclick = () => {
+                    selectedSize = sz;
+                    sizeContainer.querySelectorAll('button').forEach(b => b.className = "px-4 py-2 rounded-xl text-xs font-bold border bg-brand-dark text-gray-300 border-gray-700 hover:border-brand-gold");
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold border bg-brand-gold text-black border-brand-gold";
+                    updateWhatsAppLink();
+                };
+                sizeContainer.appendChild(btn);
+            });
+
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function updateWhatsAppLink() {
+            if (!currentProduct) return;
+            const message = `Hi, I am interested in inquiring about "${currentProduct.name}" (Price: ₹${currentProduct.price}) in UK Size ${selectedSize} from Wahid Footwear. Is it available?`;
+            document.getElementById('whatsappInquiryBtn').href = `https://wa.me/919069503165?text=${encodeURIComponent(message)}`;
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('inquiryName').value;
+            const phone = document.getElementById('inquiryPhone').value;
+            const msg = document.getElementById('inquiryMsg').value;
+            const text = `Hi, my name is ${name} (Phone: ${phone}). Inquiry: ${msg}`;
+            window.open(`https://wa.me/919069503165?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function showNotification(title, msg) {
+            const box = document.getElementById('notificationBox');
+            document.getElementById('notifTitle').textContent = title;
+            document.getElementById('notifMsg').textContent = msg;
+            box.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                box.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        // Modern Toast Notification Function
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            if (!toast) return;
+
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+
+            if (type === 'success') {
+                toastIcon.className = 'text-green-400 text-lg';
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                toastIcon.className = 'text-amber-400 text-lg';
+                toastIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            }
+
+            toast.classList.remove('translate-y-32', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+        
+        // Default sample reviews if none exist yet
+        let reviews = JSON.parse(localStorage.getItem('wahid_reviews')) || [
+            { name: "Aman", rating: 5, comment: "Bought formal shoes from the Jafrabad shop. Amazing comfort and look!", date: "12 Feb 2026" },
+            { name: "Sameer Khan", rating: 5, comment: "Best footwear collection and very fair pricing.", date: "20 Feb 2026" }
+        ];
+
+        // Function to render reviews on screen
+        function renderReviews() {
+            const container = document.getElementById('reviewsContainer');
+            if (!container) return;
+
+            const isAdmin = localStorage.getItem('wahid_admin_logged_in') === 'true' || localStorage.getItem('wahid_admin_auth') === 'true';
+
+            if (reviews.length === 0) {
+                container.innerHTML = `<p class="text-gray-500 text-sm">No reviews yet. Be the first to leave one!</p>`;
+                return;
+            }
+
+            container.innerHTML = reviews.map((rev, index) => {
+                let stars = '⭐'.repeat(Number(rev.rating));
+                return `
+                    <div class="bg-[#181818] p-5 rounded-2xl border border-gray-800 shadow-md relative group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-white text-sm">${rev.name}</span>
+                            <span class="text-xs text-gray-500">${rev.date}</span>
+                        </div>
+                        <div class="text-amber-400 text-xs mb-2">${stars}</div>
+                        <p class="text-gray-300 text-sm">${rev.comment}</p>
+                        
+                        ${isAdmin ? `
+                            <button onclick="deleteReview(${index})" class="absolute top-4 right-4 text-red-500 hover:text-red-400 text-xs bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Function when user submits a new review
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reviewerName').value.trim();
+            const rating = document.getElementById('reviewRating').value;
+            const comment = document.getElementById('reviewComment').value.trim();
+            
+            const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            const newReview = {
+                name: name,
+                rating: rating,
+                comment: comment,
+                date: currentDate
+            };
+
+            reviews.unshift(newReview);
+            localStorage.setItem('wahid_reviews', JSON.stringify(reviews));
+            
+            renderReviews();
+            document.getElementById('reviewForm').reset();
+            
+            // Trigger toast notification instead of alert
+            showToast('Review Posted!', 'Thank you for sharing your feedback.');
+        }
+
+        // Function for Admin to delete a review
+        function deleteReview(index) {
+            if (confirm('Are you sure you want to delete this review?')) {
+                reviews.splice(index, 1);
+                localStorage.setItem('wahid_reviews', JSON.stringify(reviews));
+                renderReviews();
+                showToast('Review Deleted', 'The review has been removed.', 'warning');
+            }
+        }
+    </script>
+</body>
+</html>
